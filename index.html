@@ -1,0 +1,194 @@
+
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description" content="A TV show finder with a watchlist, built with HTML, CSS and JavaScript.">
+
+  <title>ShowShelf</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet" href="my-theme.css">
+
+</head>
+
+<body>
+
+  <header class="site-header">
+
+    <div class="container header-inner">
+
+      <a href="index.html" class="logo" id="logo">ShowShelf</a>
+
+      <nav class="nav">
+
+        <a href="index.html" id="nav-home">Home</a>
+
+        <a href="index.html" id="nav-mylist">My List <span class="list-count" id="list-count">0</span></a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+ 
+
+  <main class="container">
+
+    <!-- View 1: home, with the search and the grid of shows -->
+
+    <section id="home-view">
+
+      <div class="hero">
+
+        <h1>What are we watching tonight?</h1>
+
+        <p id="tagline">Search real shows from TVmaze and keep your watchlist.</p>
+
+        <form class="search" id="search-form">
+
+          <input type="search" id="search" placeholder="Search shows, e.g. office" aria-label="Search shows">
+
+          <button type="submit">Search</button>
+
+        </form>
+
+      </div>
+
+      <div class="toolbar">
+
+        <div class="genres" id="genres"></div>
+
+      </div>
+
+      <p class="status" id="status" hidden></p>
+
+      <p class="status" id="empty-message" hidden>No shows match your search.</p>
+
+      <div class="grid" id="grid"></div>
+
+    </section>
+
+ 
+
+    <!-- View 2: one show -->
+
+    <section id="show-view" hidden>
+
+      <p class="back-link"><button type="button" class="button-secondary" id="back-button">← Back to shows</button></p>
+
+      <p class="status" id="show-status" hidden></p>
+
+      <article class="show" id="show-details">
+
+        <div class="show-header">
+
+          <img class="poster" id="show-poster" src="poster.svg" alt="">
+
+          <div>
+
+            <h1 id="show-name"></h1>
+
+            <p class="meta" id="show-meta"></p>
+
+            <p class="rating" id="show-rating"></p>
+
+            <p id="show-genres"></p>
+
+            <p class="intro" id="show-summary"></p>
+
+            <p class="show-links"><button type="button" id="show-list-button">+ Add to My List</button></p>
+
+          </div>
+
+        </div>
+
+        <section>
+
+          <h2>Cast</h2>
+
+          <ul id="show-cast"></ul>
+
+        </section>
+
+        <section>
+
+          <h2>Seasons</h2>
+
+          <table class="seasons">
+
+            <thead>
+
+              <tr><th>Season</th><th>Episodes</th><th>Year</th></tr>
+
+            </thead>
+
+            <tbody id="show-seasons"></tbody>
+
+          </table>
+
+        </section>
+
+      </article>
+
+    </section>
+
+ 
+
+    <!-- View 3: My List -->
+
+    <section id="mylist-view" hidden>
+
+      <div class="hero">
+
+        <h1>My List</h1>
+
+        <p>The shows you saved. They stay here after a reload.</p>
+
+      </div>
+
+      <p class="status" id="mylist-empty">Your list is empty. Press + on a show to add it.</p>
+
+      <div class="grid" id="mylist-grid"></div>
+
+    </section>
+
+  </main>
+
+ 
+
+  <footer class="site-footer">
+
+    <!-- "Made by ..." is filled in from site.js -->
+
+    <p id="made-by" hidden></p>
+
+    <!-- TVmaze's data is free to use if we say where it comes from -->
+
+    <p>Built in the Web Dev in 11 Days course · <a href="https://www.tvmaze.com">Data from TVmaze</a></p>
+
+  </footer>
+
+ 
+
+  <!-- The order matters: each file can use what the files above it made -->
+
+  <script src="helpers.js"></script>
+
+  <script src="site.js"></script>
+
+  <script src="app.js"></script>
+
+  <script src="extra.js"></script>
+
+</body>
+
+</html>

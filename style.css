@@ -1,0 +1,1183 @@
+/* =========================================================
+
+   ShowShelf styles (shared by the Lab from Day 3 on)
+
+   Mobile-first: base styles are for phones, media queries
+
+   add columns on bigger screens.
+
+   ========================================================= */
+
+ 
+
+/* ---------- Design tokens (CSS custom properties) ---------- */
+
+:root {
+
+  --color-bg: #f6f5fb;
+
+  --color-surface: #ffffff;
+
+  --color-text: #1c1b29;
+
+  --color-muted: #676580;
+
+  --color-border: #e3e0f0;
+
+  --color-accent: #5b3fd6;      /* violet */
+
+  --color-accent-dark: #3d2a99;
+
+  --color-star: #b7791f;        /* rating star */
+
+  --radius: 12px;
+
+}
+
+ 
+
+/* ---------- Base ---------- */
+
+* {
+
+  box-sizing: border-box;
+
+}
+
+ 
+
+body {
+
+  margin: 0;
+
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  line-height: 1.6;
+
+  color: var(--color-text);
+
+  background-color: var(--color-bg);
+
+}
+
+ 
+
+img {
+
+  max-width: 100%;
+
+  display: block;
+
+}
+
+ 
+
+a {
+
+  color: var(--color-accent);
+
+}
+
+ 
+
+a:hover {
+
+  color: var(--color-accent-dark);
+
+}
+
+ 
+
+h1, h2, h3 {
+
+  line-height: 1.2;
+
+}
+
+ 
+
+.container {
+
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding: 0 16px;
+
+}
+
+ 
+
+/* ---------- Header (Flexbox) ---------- */
+
+.site-header {
+
+  background-color: var(--color-surface);
+
+  border-bottom: 1px solid var(--color-border);
+
+}
+
+ 
+
+.header-inner {
+
+  display: flex;
+
+  justify-content: space-between;   /* logo left, nav right */
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  padding-top: 12px;
+
+  padding-bottom: 12px;
+
+}
+
+ 
+
+.logo {
+
+  font-weight: 800;
+
+  font-size: 1.3rem;
+
+  text-decoration: none;
+
+  letter-spacing: -0.02em;
+
+}
+
+ 
+
+.nav {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+}
+
+ 
+
+.nav a {
+
+  text-decoration: none;
+
+  color: var(--color-text);
+
+}
+
+ 
+
+.nav a:hover {
+
+  color: var(--color-accent);
+
+}
+
+ 
+
+/* ---------- Hero + search ---------- */
+
+.hero {
+
+  text-align: center;
+
+  padding: 40px 0 28px;
+
+}
+
+ 
+
+.hero h1 {
+
+  font-size: 1.9rem;
+
+  margin: 0 0 8px;
+
+}
+
+ 
+
+.hero p {
+
+  color: var(--color-muted);
+
+  margin: 0 0 24px;
+
+}
+
+ 
+
+.search {
+
+  display: flex;
+
+  gap: 8px;
+
+  max-width: 520px;
+
+  margin: 0 auto;
+
+}
+
+ 
+
+.search input {
+
+  flex: 1;                           /* take all remaining space */
+
+  min-width: 0;                      /* allow it to shrink on small phones */
+
+  padding: 12px 14px;
+
+  font-size: 1rem;
+
+  border: 1px solid var(--color-border);
+
+  border-radius: 8px;
+
+  background: var(--color-surface);
+
+  color: var(--color-text);
+
+}
+
+ 
+
+button {
+
+  padding: 12px 18px;
+
+  font-size: 1rem;
+
+  font-family: inherit;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background-color: var(--color-accent);
+
+  color: #ffffff;
+
+  cursor: pointer;
+
+}
+
+ 
+
+button:hover {
+
+  background-color: var(--color-accent-dark);
+
+}
+
+ 
+
+/* In dark mode the accent is light, so button text must be dark */
+
+ 
+
+/* ---------- Show grid (CSS Grid) ---------- */
+
+.shows-section h2 {
+
+  margin: 0 0 16px;
+
+}
+
+ 
+
+.grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);   /* phones: 2 columns (posters are narrow) */
+
+  gap: 16px;
+
+  margin-bottom: 48px;
+
+}
+
+ 
+
+@media (min-width: 600px) {
+
+  .grid {
+
+    grid-template-columns: repeat(3, 1fr);   /* tablets: 3 columns */
+
+  }
+
+}
+
+ 
+
+@media (min-width: 900px) {
+
+  .grid {
+
+    grid-template-columns: repeat(4, 1fr);   /* laptops: 4 columns */
+
+  }
+
+  .hero h1 {
+
+    font-size: 2.6rem;
+
+  }
+
+}
+
+ 
+
+@media (min-width: 1200px) {
+
+  .grid {
+
+    grid-template-columns: repeat(6, 1fr);   /* big screens: 6 columns */
+
+  }
+
+}
+
+ 
+
+/* ---------- Card ---------- */
+
+.card {
+
+  background-color: var(--color-surface);
+
+  border: 1px solid var(--color-border);
+
+  border-radius: var(--radius);
+
+  overflow: hidden;                  /* round the poster corners too */
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+}
+
+ 
+
+.card:hover {
+
+  transform: translateY(-4px);
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+}
+
+ 
+
+.poster {
+
+  width: 100%;
+
+  aspect-ratio: 2 / 3;               /* the classic poster shape */
+
+  object-fit: cover;                 /* fill the box without stretching */
+
+  background-color: var(--color-border);
+
+}
+
+ 
+
+.card-body {
+
+  padding: 10px 12px 14px;
+
+}
+
+ 
+
+.card h3 {
+
+  margin: 8px 0 4px;
+
+  font-size: 1rem;
+
+}
+
+ 
+
+.badge {
+
+  display: inline-block;
+
+  font-size: 0.7rem;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+
+  padding: 2px 8px;
+
+  border-radius: 999px;
+
+  background-color: var(--color-border);
+
+  color: var(--color-accent-dark);
+
+}
+
+ 
+
+.rating {
+
+  margin: 0;
+
+  font-size: 0.9rem;
+
+  font-weight: 700;
+
+  color: var(--color-star);
+
+}
+
+ 
+
+.meta {
+
+  color: var(--color-muted);
+
+  font-size: 0.85rem;
+
+  margin: 0;
+
+}
+
+ 
+
+/* ---------- Show page ---------- */
+
+.show {
+
+  max-width: 900px;
+
+  margin: 32px auto;
+
+  padding: 16px;                       /* 24px from 600px, see below */
+
+  background-color: var(--color-surface);
+
+  border: 1px solid var(--color-border);
+
+  border-radius: var(--radius);
+
+}
+
+ 
+
+.show-header {
+
+  display: grid;
+
+  gap: 24px;
+
+}
+
+ 
+
+@media (min-width: 600px) {
+
+  .show {
+
+    padding: 24px;
+
+  }
+
+}
+
+ 
+
+.show-header .poster {
+
+  max-width: 220px;
+
+  border-radius: 8px;
+
+}
+
+ 
+
+.show-header h1 {
+
+  margin: 0 0 8px;
+
+  font-size: 2rem;
+
+}
+
+ 
+
+.show-header .meta,
+
+.show-header .rating {
+
+  margin-bottom: 8px;
+
+}
+
+ 
+
+.intro {
+
+  font-size: 1.05rem;
+
+}
+
+ 
+
+@media (min-width: 700px) {
+
+  .show-header {
+
+    grid-template-columns: 220px 1fr;  /* poster left, info right */
+
+  }
+
+}
+
+ 
+
+.seasons {
+
+  width: 100%;
+
+  max-width: 480px;
+
+  border-collapse: collapse;           /* one line between cells, not two */
+
+}
+
+ 
+
+.seasons th,
+
+.seasons td {
+
+  padding: 6px 8px;
+
+  border-bottom: 1px solid var(--color-border);
+
+  text-align: left;
+
+}
+
+ 
+
+.seasons th {
+
+  color: var(--color-muted);
+
+  font-weight: 600;
+
+}
+
+ 
+
+.seasons tfoot td {
+
+  font-weight: 700;
+
+}
+
+ 
+
+/* ---------- About page ---------- */
+
+.about {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+
+  gap: 24px;
+
+  max-width: 720px;
+
+  margin: 48px auto;
+
+}
+
+ 
+
+@media (min-width: 700px) {
+
+  .about {
+
+    flex-direction: row;
+
+    text-align: left;
+
+  }
+
+}
+
+ 
+
+.avatar {
+
+  width: 140px;
+
+  height: 140px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  flex-shrink: 0;
+
+}
+
+ 
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+
+  text-align: center;
+
+  padding: 24px;
+
+  color: var(--color-muted);
+
+  font-size: 0.9rem;
+
+  border-top: 1px solid var(--color-border);
+
+}
+
+ 
+
+/* =========================================================
+
+   Day 5 additions: toolbar, genre chips, My List, modal
+
+   ========================================================= */
+
+ 
+
+.toolbar {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 20px;
+
+}
+
+ 
+
+/* Phones: one row of chips you can swipe sideways */
+
+.genres {
+
+  display: flex;
+
+  gap: 8px;
+
+  overflow-x: auto;
+
+  padding-bottom: 4px;
+
+  max-width: 100%;
+
+}
+
+ 
+
+/* Bigger screens: chips wrap onto more lines */
+
+@media (min-width: 600px) {
+
+  .genres {
+
+    flex-wrap: wrap;
+
+    overflow-x: visible;
+
+  }
+
+}
+
+ 
+
+.chip {
+
+  flex-shrink: 0;             /* keep each chip on one line */
+
+  padding: 6px 14px;
+
+  font-size: 0.9rem;
+
+  border-radius: 999px;
+
+  border: 1px solid var(--color-border);
+
+  background-color: var(--color-surface);
+
+  color: var(--color-text);
+
+}
+
+ 
+
+.chip:hover {
+
+  background-color: var(--color-border);
+
+}
+
+ 
+
+.chip.active {
+
+  background-color: var(--color-accent);
+
+  border-color: var(--color-accent);
+
+  color: #ffffff;
+
+}
+
+ 
+
+.only-list {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+}
+
+ 
+
+.only-list input {
+
+  width: 18px;
+
+  height: 18px;
+
+  accent-color: var(--color-accent);
+
+}
+
+ 
+
+.list-count {
+
+  font-weight: 600;
+
+  padding: 2px 10px;
+
+  border-radius: 999px;
+
+  background-color: var(--color-border);
+
+  color: var(--color-accent-dark);
+
+}
+
+ 
+
+.card {
+
+  position: relative;         /* so the ＋ button can sit on top of the poster */
+
+  cursor: pointer;
+
+}
+
+ 
+
+.list-btn {
+
+  position: absolute;
+
+  top: 8px;
+
+  right: 8px;
+
+  width: 36px;
+
+  height: 36px;
+
+  padding: 0;
+
+  border-radius: 50%;
+
+  font-size: 1.1rem;
+
+  line-height: 1;
+
+  background-color: rgba(18, 17, 26, 0.7);
+
+  color: #ffffff;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+
+}
+
+ 
+
+.list-btn:hover {
+
+  background-color: rgba(18, 17, 26, 0.9);
+
+}
+
+ 
+
+.list-btn[aria-pressed="true"] {
+
+  background-color: var(--color-accent);
+
+}
+
+ 
+
+.status {
+
+  text-align: center;
+
+  color: var(--color-muted);
+
+  padding: 32px 0;
+
+}
+
+ 
+
+.status.error {
+
+  color: #c0392b;
+
+}
+
+ 
+
+/* <dialog> modal */
+
+.details {
+
+  width: min(640px, 92vw);
+
+  max-height: 90vh;
+
+  border: none;
+
+  border-radius: var(--radius);
+
+  padding: 24px;
+
+  background-color: var(--color-surface);
+
+  color: var(--color-text);
+
+}
+
+ 
+
+.details::backdrop {
+
+  background: rgba(0, 0, 0, 0.6);
+
+}
+
+ 
+
+.details-inner {
+
+  display: grid;
+
+  gap: 20px;
+
+  clear: both;
+
+}
+
+ 
+
+.details .poster {
+
+  max-width: 180px;
+
+  border-radius: 8px;
+
+}
+
+ 
+
+.details h2 {
+
+  margin: 0 0 8px;
+
+}
+
+ 
+
+.details .badge {
+
+  margin-right: 6px;
+
+}
+
+ 
+
+@media (min-width: 600px) {
+
+  .details-inner {
+
+    grid-template-columns: 180px 1fr;   /* poster left, text right */
+
+  }
+
+}
+
+ 
+
+.close-btn {
+
+  float: right;
+
+  padding: 4px 10px;
+
+  margin-bottom: 8px;
+
+}
+
+ 
+
+/* Dark mode: the light accent needs dark text, and a softer red */
+
+ 
+
+/* =========================================================
+
+   Day 6 additions: show page with real data
+
+   ========================================================= */
+
+ 
+
+.site-footer a {
+
+  color: var(--color-muted);
+
+}
+
+ 
+
+.back-link {
+
+  margin: 24px 0 0;
+
+}
+
+ 
+
+/* Hide the empty show box while loading or after an error */
+
+.show:empty {
+
+  display: none;
+
+}
+
+ 
+
+.show section {
+
+  margin-top: 32px;
+
+}
+
+ 
+
+.show .badge {
+
+  margin-bottom: 4px;
+
+}
+
+ 
+
+/* The My List button and the TVmaze link side by side, wrapping on small phones */
+
+.show-links {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  gap: 12px 20px;
+
+}
+
+ 
+
+.button-secondary {
+
+  margin-top: 16px;
+
+  background-color: transparent;
+
+  color: var(--color-accent);
+
+  border: 1px solid var(--color-accent);
+
+}
+
+ 
+
+.button-secondary:hover {
+
+  background-color: var(--color-border);
+
+}
+
+ 
+
+/* Cast: small portrait cards. 3 columns on phones, more on bigger screens */
+
+.cast-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 16px;
+
+}
+
+ 
+
+@media (min-width: 600px) {
+
+  .cast-grid {
+
+    grid-template-columns: repeat(4, 1fr);
+
+  }
+
+}
+
+ 
+
+@media (min-width: 900px) {
+
+  .cast-grid {
+
+    grid-template-columns: repeat(6, 1fr);
+
+  }
+
+}
+
+ 
+
+.cast-card {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+
+  font-size: 0.9rem;
+
+  line-height: 1.3;
+
+}
+
+ 
+
+.cast-card img {
+
+  width: 100%;
+
+  aspect-ratio: 2 / 3;
+
+  object-fit: cover;
+
+  border-radius: 8px;
+
+  margin-bottom: 6px;
+
+  background-color: var(--color-border);
+
+}
+
+ 
+
+/* Stretch: episodes list */
+
+.episodes h3 {
+
+  margin: 20px 0 6px;
+
+}
+
+ 
+
+.episodes ol {
+
+  list-style: none;         /* the S01E01 code already numbers them */
+
+  padding: 0;
+
+  margin: 0;
+
+  columns: 2 260px;         /* two columns when there is room */
+
+}
+
+ 
+
+.episodes li {
+
+  padding: 2px 0;
+
+  break-inside: avoid;
+
+}
+
+ 
+
+/* ---------- Your colours from Day 2 (they override the ones above) ---------- */
+
+/* your theme colours from Day 2 go here */
